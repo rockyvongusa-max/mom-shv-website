@@ -658,8 +658,8 @@
         }
 
         .mermaid-code {
-            background: #2C3E50;
-            color: #d4d4d4;
+            background: #FAF4E8;
+            color: #2C2416;
             padding: 16px;
             border-radius: 8px;
             font-size: 0.75rem;
@@ -1522,66 +1522,82 @@ GET    /api/v1/incentive-requests/{id}/print-draft
     </footer>
 
     <script>
-        // Initialize Mermaid diagrams
+        // Initialize Mermaid diagrams - LIGHT THEME for readability
         mermaid.initialize({
             startOnLoad: false,
             theme: 'base',
             themeVariables: {
+                // Light theme base colors
                 primaryColor: '#D4A843',
-                primaryTextColor: '#FFFFFF',
+                primaryTextColor: '#2C2416',
                 primaryBorderColor: '#B8892A',
-                lineColor: '#FFFFFF',
-                secondaryColor: '#2C3E50',
-                tertiaryColor: '#1a252f',
-                // Sequence diagram specific
-                actorBkg: '#2C3E50',
+                lineColor: '#5C4A28',
+                secondaryColor: '#FAF4E8',
+                tertiaryColor: '#F0E8D8',
+                // Backgrounds
+                mainBkg: '#FFFFFF',
+                secondBkg: '#FAF4E8',
+                // Sequence diagram - light
+                actorBkg: '#FFFFFF',
                 actorBorder: '#D4A843',
-                actorTextColor: '#FFFFFF',
-                actorLineColor: '#FFFFFF',
-                signalColor: '#FFFFFF',
-                signalTextColor: '#FFFFFF',
-                // Sequence numbers
-                sequenceNumberColor: '#1a252f',
-                // Box/container backgrounds
-                altBoxBkg: '#34495e',
+                actorTextColor: '#2C2416',
+                actorLineColor: '#B8892A',
+                signalColor: '#5C4A28',
+                signalTextColor: '#2C2416',
+                sequenceNumberColor: '#FFFFFF',
+                // Boxes/containers
+                altBoxBkg: '#FAF4E8',
                 altBoxBorder: '#D4A843',
-                boxBkg: '#2C3E50',
+                boxBkg: '#FFFFFF',
                 boxBorder: '#D4A843',
-                // Loop/section backgrounds
-                loopBkg: '#34495e',
+                // Loop/section
+                loopBkg: '#FAF4E8',
                 loopBorder: '#D4A843',
-                // Note backgrounds
-                noteBkgColor: '#1a5276',
-                noteTextColor: '#FFFFFF',
-                noteBorderColor: '#2e86ab',
+                // Notes
+                noteBkgColor: '#FEF9E7',
+                noteTextColor: '#2C2416',
+                noteBorderColor: '#D4A843',
                 // Labels
-                labelColor: '#FFFFFF',
+                labelColor: '#2C2416',
+                labelTextColor: '#2C2416',
                 // Arrows
-                arrowheadColor: '#FFFFFF',
-                // Entity colors
+                arrowheadColor: '#5C4A28',
+                // Entity colors (for ER diagrams)
                 fillType0: '#D4A843',
                 fillType1: '#27ae60',
                 fillType2: '#e74c3c',
                 fillType3: '#3498db',
                 fillType4: '#9b59b6',
                 fillType5: '#f39c12',
-                // ER diagram
+                // ER specific
                 entityColor: '#D4A843',
-                attributeBackgroundColor: '#2C3E50',
-                attributeTextColor: '#FFFFFF',
-                attributeBorderColor: '#B8892A',
+                entityTitleColor: '#FFFFFF',
+                entityTitleBgColor: '#D4A843',
+                attributeBackgroundColor: '#FAF4E8',
+                attributeTextColor: '#2C2416',
+                attributeBorderColor: '#D4A843',
                 // State diagram
-                stateBkg: '#2C3E50',
+                stateBkg: '#FFFFFF',
                 stateBorder: '#D4A843',
-                stateTextColor: '#FFFFFF',
+                stateTextColor: '#2C2416',
+                innerEndBackground: '#D4A843',
+                innerEndBorder: '#B8892A',
+                startEndBackground: '#D4A843',
+                startEndBorder: '#B8892A',
                 // Git diagram
-                commitLabelColor: '#FFFFFF',
+                commitLabelColor: '#2C2416',
                 commitFill0: '#D4A843',
                 commitFill1: '#27ae60',
                 commitFill2: '#e74c3c',
+                // Text background
+                textOverlayBackgroundColor: '#FAF4E8',
+                // Grid lines
+                gridColor: '#E8E0D0',
             },
-            flowchart: { curve: 'basis', padding: 20 },
-            sequence: { useMaxWidth: true, wrap: true, diagramMarginX: 20, diagramMarginY: 20 }
+            flowchart: { curve: 'basis', padding: 20, htmlLabels: true },
+            sequence: { useMaxWidth: true, wrap: true, diagramMarginX: 30, diagramMarginY: 30 },
+            er: { useMaxWidth: true, diagramPadding: 20 },
+            state: { useMaxWidth: true, diagramPadding: 20 }
         });
 
         // Render Mermaid diagrams
