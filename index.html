@@ -680,10 +680,12 @@
 
         /* State diagram specific overrides */
         .mermaid-code svg .stateGroup text,
-        .mermaid-code svg .stateLabel text,
         .mermaid-code svg .stateGroup tspan,
+        .mermaid-code svg .stateLabel text,
         .mermaid-code svg .stateLabel tspan,
-        .mermaid-code svg .stateText {
+        .mermaid-code svg .stateText,
+        .mermaid-code svg g[class*="state"] text,
+        .mermaid-code svg g[class*="state"] tspan {
             fill: #2C2416 !important;
             color: #2C2416 !important;
         }
@@ -694,11 +696,12 @@
             color: #2C2416 !important;
         }
 
-        /* Start/End nodes text */
+        /* Start/End nodes text - keep white for contrast on gold */
         .mermaid-code svg .start_state text,
         .mermaid-code svg .end_state text,
         .mermaid-code svg .innerEndState text {
             fill: #FFFFFF !important;
+            color: #FFFFFF !important;
         }
 
         /* Roadmap */
@@ -1646,18 +1649,44 @@ GET    /api/v1/incentive-requests/{id}/print-draft
                     texts.forEach(t => {
                         t.setAttribute('fill', '#2C2416');
                         t.setAttribute('stroke', 'none');
+                        t.style.fill = '#2C2416';
+                        t.style.color = '#2C2416';
                     });
                     // Also fix tspan children
                     const tspans = el.querySelectorAll('tspan');
                     tspans.forEach(t => {
                         t.setAttribute('fill', '#2C2416');
-                        t.setAttribute('stroke', 'none');
+                        t.style.fill = '#2C2416';
+                        t.style.color = '#2C2416';
                     });
                 } catch (e) {
                     el.innerHTML = '<div style="color: #e74c3c; font-size: 0.75rem; padding: 12px; background: #fdf2f2; border-radius: 6px;">⚠️ Diagram error: ' + e.message.replace(/</g, '&lt;') + '</div>';
                 }
             }
         }
+
+        // Watch for dynamically added SVG elements and fix their text colors
+        function fixMermaidText() {
+            document.querySelectorAll('.mermaid-code svg text').forEach(t => {
+                t.setAttribute('fill', '#2C2416');
+                t.style.fill = '#2C2416';
+            });
+            document.querySelectorAll('.mermaid-code svg tspan').forEach(t => {
+                t.setAttribute('fill', '#2C2416');
+                t.style.fill = '#2C2416';
+            });
+        }
+
+        const mermaidObserver = new MutationObserver(() => {
+            fixMermaidText();
+        });
+
+        // Start observing when DOM is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.mermaid-code').forEach(el => {
+                mermaidObserver.observe(el, { childList: true, subtree: true });
+            });
+        });
 
         // Render Mermaid when page loads
         window.addEventListener('load', () => {
