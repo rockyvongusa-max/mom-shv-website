@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoM Biz Reg System SHV — Tax Incentive Letter Workflow</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Moul&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #FAF4E8;
+            --cream-dark: #F0E8D8;
+            --gold: #D4A843;
+            --gold-light: #F0D890;
+            --gold-dark: #B8892A;
+            --text: #2C2416;
+            --text-light: #5C4A28;
+            --white: #FFFFFF;
+            --shadow: rgba(44, 36, 22, 0.08);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--cream);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        /* Header */
+        .header {
+            background: var(--white);
+            border-bottom: 3px solid var(--gold);
+            padding: 20px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 12px var(--shadow);
+        }
+
+        .header-brand {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .header-logo {
+            width: 48px;
+            height: 48px;
+            background: var(--gold);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 12px;
+            font-family: 'Moul', serif;
+        }
+
+        .header-title {
+            font-family: 'Moul', serif;
+            font-size: 1.2rem;
+            color: var(--text);
+        }
+
+        .header-subtitle {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .header-meta {
+            text-align: right;
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        /* Main Layout */
+        .main-container {
+            display: flex;
+            min-height: calc(100vh - 91px);
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            width: 280px;
+            background: var(--white);
+            border-right: 1px solid var(--cream-dark);
+            padding: 24px 0;
+            position: sticky;
+            top: 91px;
+            height: calc(100vh - 91px);
+            overflow-y: auto;
+        }
+
+        .sidebar-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--gold-dark);
+            font-weight: 600;
+            padding: 0 24px;
+            margin-bottom: 16px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 24px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-left: 4px solid transparent;
+            text-decoration: none;
+            color: var(--text);
+        }
+
+        .nav-item:hover {
+            background: var(--cream);
+        }
+
+        .nav-item.active {
+            background: var(--cream);
+            border-left-color: var(--gold);
+        }
+
+        .nav-number {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: var(--cream-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--text-light);
+            transition: all 0.2s ease;
+        }
+
+        .nav-item.active .nav-number {
+            background: var(--gold);
+            color: white;
+        }
+
+        .nav-text {
+            flex: 1;
+        }
+
+        .nav-label {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .nav-desc {
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        /* Content Area */
+        .content {
+            flex: 1;
+            padding: 40px;
+            max-width: 900px;
+        }
+
+        /* Page Card */
+        .page-card {
+            background: var(--white);
+            border-radius: 16px;
+            box-shadow: 0 4px 24px var(--shadow);
+            margin-bottom: 32px;
+            overflow: hidden;
+            border: 1px solid rgba(212, 168, 67, 0.2);
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+            color: white;
+            padding: 20px 28px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .page-icon {
+            width: 44px;
+            height: 44px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Moul', serif;
+            font-size: 1.2rem;
+        }
+
+        .page-title-group h2 {
+            font-family: 'Moul', serif;
+            font-size: 1.3rem;
+            font-weight: normal;
+        }
+
+        .page-title-group p {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        .page-body {
+            padding: 28px;
+        }
+
+        /* Khmer Typography */
+        .khmer-title {
+            font-family: 'Moul', serif;
+            font-size: 1.4rem;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .khmer-subtitle {
+            font-size: 1rem;
+            color: var(--text-light);
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--cream-dark);
+        }
+
+        .khmer-content {
+            font-size: 1rem;
+            line-height: 1.9;
+            color: var(--text);
+        }
+
+        .khmer-content p {
+            margin-bottom: 12px;
+        }
+
+        .khmer-content ul {
+            margin: 12px 0 12px 24px;
+        }
+
+        .khmer-content li {
+            margin-bottom: 8px;
+        }
+
+        /* Meeting Info Box */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin: 20px 0;
+        }
+
+        .info-box {
+            background: var(--cream);
+            border-radius: 10px;
+            padding: 16px;
+        }
+
+        .info-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--gold-dark);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .info-value {
+            font-size: 0.95rem;
+            color: var(--text);
+        }
+
+        /* Section Headers */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 24px 0 16px;
+        }
+
+        .section-number {
+            width: 28px;
+            height: 28px;
+            background: var(--gold);
+            color: white;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+
+        .section-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--text);
+        }
+
+        /* Level Cards */
+        .level-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin: 16px 0;
+        }
+
+        .level-card {
+            background: var(--cream);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid rgba(212, 168, 67, 0.2);
+        }
+
+        .level-badge {
+            display: inline-block;
+            background: var(--gold);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-bottom: 12px;
+        }
+
+        .level-card h4 {
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+            color: var(--text);
+        }
+
+        .level-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .level-card li {
+            font-size: 0.85rem;
+            line-height: 1.6;
+            padding: 4px 0;
+            border-bottom: 1px solid rgba(212, 168, 67, 0.1);
+        }
+
+        .level-card li:last-child {
+            border-bottom: none;
+        }
+
+        /* Summary TAB STYLES */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .summary-card {
+            background: var(--cream);
+            border-radius: 14px;
+            padding: 22px;
+            position: relative;
+            border: 1px solid rgba(212, 168, 67, 0.15);
+        }
+
+        .summary-card.full-width {
+            grid-column: span 2;
+        }
+
+        .summary-icon {
+            font-size: 1.8rem;
+            margin-bottom: 12px;
+        }
+
+        .summary-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--gold-dark);
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .summary-text {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--text);
+        }
+
+        .summary-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .summary-list li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .summary-list li::before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+            font-weight: bold;
+        }
+
+        .detailed-sections {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-top: 8px;
+        }
+
+        .detail-section {
+            background: var(--white);
+            border-radius: 10px;
+            padding: 16px;
+            border: 1px solid rgba(212, 168, 67, 0.1);
+        }
+
+        .detail-badge {
+            display: inline-block;
+            background: var(--gold);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 20px;
+            margin-bottom: 8px;
+        }
+
+        .detail-text {
+            font-size: 0.88rem;
+            line-height: 1.6;
+            color: var(--text-light);
+        }
+
+        .action-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 8px;
+        }
+
+        .action-item {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid rgba(212, 168, 67, 0.15);
+            transition: all 0.2s ease;
+        }
+
+        .action-item:hover {
+            border-color: var(--gold);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(212, 168, 67, 0.2);
+        }
+
+        .action-number {
+            width: 40px;
+            height: 40px;
+            background: var(--gold);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin: 0 auto 12px;
+        }
+
+        .action-text {
+            font-size: 0.88rem;
+            line-height: 1.6;
+            color: var(--text);
+        }
+
+        /* Footer Actions */
+        .footer-actions {
+            background: var(--white);
+            border-top: 1px solid var(--cream-dark);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--gold);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--gold-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(212, 168, 67, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--cream);
+            color: var(--text);
+        }
+
+        .btn-secondary:hover {
+            background: var(--cream-dark);
+        }
+
+        /* Signature Section */
+        .signature-section {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 2px solid var(--cream-dark);
+        }
+
+        .signature-box {
+            text-align: center;
+        }
+
+        .signature-role {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--gold-dark);
+            margin-bottom: 8px;
+        }
+
+        .signature-name {
+            font-family: 'Moul', serif;
+            font-size: 1.1rem;
+            margin: 12px 0 8px;
+        }
+
+        .signature-date {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .main-container { flex-direction: column; }
+            .sidebar { width: 100%; position: relative; top: 0; height: auto; }
+            .content { padding: 20px; }
+            .info-grid { grid-template-columns: 1fr; }
+            .level-cards { grid-template-columns: 1fr; }
+            .summary-card.full-width { grid-column: span 1; }
+            .summary-grid { grid-template-columns: 1fr; }
+            .detailed-sections { grid-template-columns: 1fr; }
+            .action-grid { grid-template-columns: 1fr; }
+            .signature-section { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-brand">
+            <div class="header-logo">MoM</div>
+            <div>
+                <div class="header-title">ក្រសួងសេដ្ឋកិច្ច និង ហិរញ្ញវត្ថុ</div>
+                <div class="header-subtitle">អគ្គនាយកដ្ឋានពន្ធដារ — GDT Tower ជាន់ទី៥</div>
+            </div>
+        </div>
+        <div class="header-meta">
+            <div>ថ្ងៃប្រជុំ: ១៣ ឧសភា ២០២៦</div>
+            <div>ម៉ោង ១០:០០</div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="sidebar-title">ទំព័រឯកសារ</div>
+            
+            <a href="#summary" class="nav-item" onclick="setActive(this)" data-tab="summary">
+                <div class="nav-number">📋</div>
+                <div class="nav-text">
+                    <div class="nav-label">សរុប Summary</div>
+                    <div class="nav-desc">English overview</div>
+                </div>
+            </a>
+
+            <a href="#page1" class="nav-item active" onclick="setActive(this)" data-tab="page1">
+                <div class="nav-number">១</div>
+                <div class="nav-text">
+                    <div class="nav-label">ទំព័រទី ១</div>
+                    <div class="nav-desc">ប្រតិបត្តិការ និង របៀបវារៈ</div>
+                </div>
+            </a>
+
+            <a href="#page2" class="nav-item" onclick="setActive(this)" data-tab="page2">
+                <div class="nav-number">២</div>
+                <div class="nav-text">
+                    <div class="nav-label">ទំព័រទី ២</div>
+                    <div class="nav-desc">សេចក្តីសម្រេច និង ហត្ថលេខា</div>
+                </div>
+            </a>
+
+            <div style="padding: 24px; margin-top: 16px; border-top: 1px solid var(--cream-dark);">
+                <div style="font-size: 0.8rem; color: var(--text-light); margin-bottom: 8px;">ប្រធានបទ</div>
+                <div style="font-size: 0.85rem; font-weight: 600;">Tax Incentive Letter Workflow</div>
+                <div style="font-size: 0.75rem; color: var(--text-light); margin-top: 4px;">SHV Special Investment Project</div>
+            </div>
+        </nav>
+
+        <!-- Content Area -->
+        <main class="content">
+
+            <!-- SUMMARY TAB -->
+            <div id="summary" class="page-card">
+                <div class="page-header" style="background: linear-gradient(135deg, #2C2416 0%, #5C4A28 100%);">
+                    <div class="page-icon">📋</div>
+                    <div class="page-title-group">
+                        <h2>Summary — English Overview</h2>
+                        <p>MoM Biz Reg System SHV Case · May 13, 2026</p>
+                    </div>
+                </div>
+                <div class="page-body">
+                    <div class="summary-grid">
+
+                        <!-- Goal -->
+                        <div class="summary-card">
+                            <div class="summary-icon">🎯</div>
+                            <div class="summary-label">Goal</div>
+                            <div class="summary-text">To finalize the functional requirements and system interface design for the new Tax Incentive issuance process for registered enterprises (Special Investment Projects in Sihanoukville) within the GDT registration management system.</div>
+                        </div>
+
+                        <!-- Objective -->
+                        <div class="summary-card">
+                            <div class="summary-icon">📌</div>
+                            <div class="summary-label">Objective</div>
+                            <div class="summary-text">Streamline the drafting and issuance of tax incentive letters by migrating to a three-level approval workflow and enhance automation for date calculation and status tracking.</div>
+                        </div>
+
+                        <!-- Key Takeaways -->
+                        <div class="summary-card full-width">
+                            <div class="summary-icon">💡</div>
+                            <div class="summary-label">Key Takeaways</div>
+                            <ul class="summary-list">
+                                <li>Workflow re-categorized into three levels (L1: Officer, L2: Chief, L3: Director General) to reflect hierarchical administrative structure.</li>
+                                <li>IT department will implement auto-calculation of end dates based on the selected tax incentive term (e.g., 3-year term → auto-expiry Dec 31 of end year).</li>
+                                <li>"Print Draft" buttons to be added at each level to facilitate document review before official submission.</li>
+                                <li>"Remark" columns for manual entries and updated interface modifications for better data entry and cross-departmental collaboration.</li>
+                            </ul>
+                        </div>
+
+                        <!-- Detailed Summary -->
+                        <div class="summary-card full-width">
+                            <div class="summary-icon">📝</div>
+                            <div class="summary-label">Detailed Summary</div>
+                            <div class="detailed-sections">
+                                <div class="detail-section">
+                                    <div class="detail-badge">System Interface</div>
+                                    <div class="detail-text">Updates needed for the "Action" tab, including clearer "Agree" and "Signature" placeholders for the Director General. DAGA will finalize and submit revised letter templates to DICT.</div>
+                                </div>
+                                <div class="detail-section">
+                                    <div class="detail-badge">Workflow Automation</div>
+                                    <div class="detail-text">The system will calculate and display expiration dates automatically based on selected years (e.g., 3-year term from 01.05.26 → auto-expiry 31.12.28).</div>
+                                </div>
+                                <div class="detail-section">
+                                    <div class="detail-badge">Communication</div>
+                                    <div class="detail-text">Officers can print draft letters with automated annexes for verification. "Print Draft" buttons to be added at Level 1 and Level 2 approval screens.</div>
+                                </div>
+                                <div class="detail-section">
+                                    <div class="detail-badge">Collaboration</div>
+                                    <div class="detail-text">DAGA will provide updated draft templates to DICT, which will prioritize immediate implementation of these system changes to align with GDT strategic plan.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Take-Action Plan -->
+                        <div class="summary-card full-width">
+                            <div class="summary-icon">⚡</div>
+                            <div class="summary-label">Take-Action Plan</div>
+                            <div class="action-grid">
+                                <div class="action-item">
+                                    <div class="action-number">01</div>
+                                    <div class="action-text"><strong>DAGA:</strong> Finalize and submit all revised letter templates and flow requirements to DICT.</div>
+                                </div>
+                                <div class="action-item">
+                                    <div class="action-number">02</div>
+                                    <div class="action-text"><strong>DICT:</strong> Update the system interface, integrate the requested buttons, and enable the "detect end date" script.</div>
+                                </div>
+                                <div class="action-item">
+                                    <div class="action-number">03</div>
+                                    <div class="action-text"><strong>Next Steps:</strong> Both teams to continue development immediately to align with the GDT strategic plan.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Date -->
+                        <div class="summary-card">
+                            <div class="summary-icon">📅</div>
+                            <div class="summary-label">Date</div>
+                            <div class="summary-text">
+                                <strong>Meeting:</strong> May 13, 2026<br>
+                                <strong>Time:</strong> 10:00 AM<br>
+                                <strong>Venue:</strong> GDT Tower 5F
+                            </div>
+                        </div>
+
+                        <!-- Co-Chairs -->
+                        <div class="summary-card">
+                            <div class="summary-icon">👥</div>
+                            <div class="summary-label">Co-Chairs</div>
+                            <div class="summary-text">
+                                <strong>Su Sarith</strong> — DICT Vice Director<br>
+                                <strong>Ka Pengta</strong> — DAGA Vice Director
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- PAGE 1 -->
+            <div id="page1" class="page-card">
+                <div class="page-header">
+                    <div class="page-icon">១</div>
+                    <div class="page-title-group">
+                        <h2>ទំព័រទី ១ — ប្រតិបត្តិការណ៍</h2>
+                        <p>GDT Tower · ១៣ ឧសភា ២០២៦ · ១០:០០</p>
+                    </div>
+                </div>
+                <div class="page-body">
+                    <div class="khmer-title">កំណត់ហេតុអង្គប្រជុំ</div>
+                    <div class="khmer-subtitle">បទបញ្ជារបស់ការចេញលិខិតលើកទឹកចិត្តផ្នែកពន្ធដារសម្រាប់សហគ្រាសចុះបញ្ជី រំរួាល (គម្រោងវិនិយោគខេត្តព្រះសីហនុ)</div>
+
+                    <div class="info-grid">
+                        <div class="info-box">
+                            <div class="info-label">កាលបរិច្ឆេទ</div>
+                            <div class="info-value">ថ្ងៃពុធ ទី១៣ ខែឧសភា ឆ្នាំ២០២៦</div>
+                        </div>
+                        <div class="info-box">
+                            <div class="info-label">ម៉ោង</div>
+                            <div class="info-value">១០ និង ០០ នាទីព្រឹក</div>
+                        </div>
+                        <div class="info-box">
+                            <div class="info-label">ទីកន្លែង</div>
+                            <div class="info-value">បន្ទប់ប្រជុំជាន់ទី៥ (GDT Tower)</div>
+                        </div>
+                        <div class="info-box">
+                            <div class="info-label">ដឹកនាំដោយ</div>
+                            <div class="info-value">លោក ស៊ូ សារ៉េត (DICT) + លោក កែ ប៉ង់តា (DAGA)</div>
+                        </div>
+                    </div>
+
+                    <div class="khmer-content">
+                        <p>ជាកិច្ចចាប់ផ្តើម លោក ស៊ូ សារ៉េត និង លោក កែ ប៉ង់តា សហប្រធានអង្គប្រជុំបានសម្ដែងនូវកិច្ចស្វាគមន៍ និងថ្លែងអំណរគុណយ៉ាងជ្រាលជ្រៅចំពោះសមាជិកអង្គប្រជុំ នាយកដ្ឋានបច្ចេកវិទ្យាព័ត៌មាន (DICT) និង នាយកដ្ឋានរដ្ឋបាលនិងកិច្ចការទូទៅ (DAGA) ដែលបានឆ្លៀតពេលវេលាដ៏មានតម្លៃដើម្បីចូលរួមក្នុងកិច្ចប្រជុំនេះ។</p>
+
+                        <div class="section-header">
+                            <div class="section-number">I</div>
+                            <div class="section-title">ចំណុចពិភាក្សានៃអង្គប្រជុំ</div>
+                        </div>
+
+                        <p>អង្គប្រជុំបានពិភាក្សាលើចំណុចមួយចំនួនដូចខាងក្រោម ៖</p>
+
+                        <!-- Level Cards -->
+                        <div class="level-cards">
+                            <div class="level-card">
+                                <div class="level-badge">កម្រិត ១ — មន្ត្រី</div>
+                                <ul>
+                                    <li>លិខិតជម្រាបជូនទៅអ្នកជាប់ពន្ធ ភ្ជាប់ជាមួយលិខិតឧបសម្ព័ន្ធ</li>
+                                    <li>DAGA កែសម្រួលទម្រង់តាមគម្រូដែលធ្លាប់ប្រើ</li>
+                                    <li>កែសម្រួលពី ៣ កម្រិត → ៣ កម្រិត (មន្ត្រី, ប្រធាន, អគ្គនាយក)</li>
+                                    <li>បន្ថែម "detect ឆ្នំាបញ្ចប់" — ប្រព័ន្ធគណនាថ្ងៃប្ចប់ស្វ័យប្រវត្តិ</li>
+                                </ul>
+                            </div>
+                            <div class="level-card">
+                                <div class="level-badge">កម្រិត ២ — ប្រធាន</div>
+                                <ul>
+                                    <li>ពិនិត្យព័ត៌មានរួចរាល់</li>
+                                    <li>ប៊ូតុង "បោះពុម្ពលិខិត និងបញ្ជូនឯកសារ"</li>
+                                    <li>បន្ថែមប៊ូតុងបោះពុម្ពលិខិតលើកទឹកចិត្ត (លិខិតព្រាង)</li>
+                                    <li>បញ្ជូនឯកសារទៅកម្រិត ៣</li>
+                                </ul>
+                            </div>
+                            <div class="level-card">
+                                <div class="level-badge">កម្រិត ៣ — អគ្គនាយក</div>
+                                <ul>
+                                    <li>ដកប៊ូតុង "បញ្ចូលចំណារ"</li>
+                                    <li>បន្ថែម "ប៊ូតុងឯកភាព និងបង្ហាញសេចក្តីសម្រេច"</li>
+                                    <li>ប៊ូតុង "ឯកភាព និងបញ្ចូលចំណារ"</li>
+                                    <li>Interface សកម្មភាព — ធ្វើបច្ចុប្បន្នភាព</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <p style="margin-top: 16px;">DAGA ស្នើសុំឱ្យកែសម្រួល Interface ត្ង់ព័ត៌មានការលើកទឹកចិត្ត ចំណុចបញ្ចូលបរិយាយ ដោយបន្ថែមប្រភេទពន្ធ កំណត់ចំនួនឆ្នំា និងបញ្ចូលបរិយាយបន្ថែម ហើយក្រុមការងារបច្ចេកទេសនឹងបង្កើត alert notification ដើម្បី្យមន្ត្រីវាយបញ្ចូលមូលហេតុខុសប្លែកក្នុង column Remark ផងដែរ ។</p>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- PAGE 2 -->
+            <div id="page2" class="page-card">
+                <div class="page-header">
+                    <div class="page-icon">២</div>
+                    <div class="page-title-group">
+                        <h2>ទំព័រទី ២ — សេចក្តីសម្រេច និង ហត្ថលេខា</h2>
+                        <p>បេក្ខជន ១២:៣០ រសៀល</p>
+                    </div>
+                </div>
+                <div class="page-body">
+                    <div class="khmer-content">
+                        <div class="section-header">
+                            <div class="section-number">II</div>
+                            <div class="section-title">សេចក្តីសម្រេចរបស់អង្គប្រជុំ</div>
+                        </div>
+
+                        <div class="level-cards" style="grid-template-columns: repeat(2, 1fr);">
+                            <div class="level-card" style="border-left: 4px solid var(--gold);">
+                                <div class="level-badge" style="background: var(--text);">សេចក្តីសម្រេច ១</div>
+                                <p style="font-size: 0.95rem; margin-top: 8px;">DAGA បន្តសម្របសម្រួល និងកែសម្រួលខ្លឹមសារលិខិត និងទម្រង់លិខិត ដើម្បីផ្ដល់ជូនមក DICT ។</p>
+                            </div>
+                            <div class="level-card" style="border-left: 4px solid var(--gold);">
+                                <div class="level-badge" style="background: var(--text);">សេចក្តីសម្រេច ២</div>
+                                <p style="font-size: 0.95rem; margin-top: 8px;">DICT កែសម្រួលតាមធាតុចូលរបស់ DAGA ឱ្យបានឆាប់រហ័ស ។</p>
+                            </div>
+                        </div>
+
+                        <p style="margin-top: 24px;">ជាកិច្ចបញ្ចប់ លោក ស៊ូ សារ៉េត និង លោក កែ ប៉ង់តា បានថ្លែងអំណរគុណ និងបានជូនពរចំពោះសមាជិកអង្គប្រជុំទាំងអស់ ដែលបានអញ្ជើញចូលរួម និងបានលើកឡើងជាមតិព្រម ទាំងដំណោះស្រាយ យ៉ាងចំពោះមុខ ដើម្បីជាទិសដៅបន្ត សម្រាប់អនុវត្តការងារ ឱ្យស្របទៅតាមផែនការរួម របស់អគ្គនាយកដ្ឋានពន្ធដារ ។</p>
+
+                        <p style="margin-top: 16px; color: var(--text-light);">អង្គប្រជុំបានបញ្ចប់នៅវេលាម៉ោង <strong>១២ និង ៣០ នាទីរសៀល</strong> នាថ្ងៃខែឆ្នំា ដែលក្រោយ បរិយាកាសសន្តិធិសាល ក្នុងស្មារតីទទួលខុសត្រូវខ្ពស់ ។</p>
+
+                        <div class="signature-section">
+                            <div class="signature-box">
+                                <div class="signature-role">អ្នកធ្វើកំណត់ហេតុ</div>
+                                <div class="signature-name"> </div>
+                                <div class="signature-date"> </div>
+                            </div>
+                            <div class="signature-box">
+                                <div class="signature-role">សហប្រធានអង្គប្រជុំ</div>
+                                <div class="signature-name">ស៊ូ សារ៉េត</div>
+                                <div class="signature-date">DICT</div>
+                            </div>
+                            <div class="signature-box">
+                                <div class="signature-role">សហប្រធានអង្គប្រជុំ</div>
+                                <div class="signature-name">កែ ប៉ង់តា</div>
+                                <div class="signature-date">DAGA</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Footer Actions -->
+    <footer class="footer-actions">
+        <div>
+            <span style="font-size: 0.85rem; color: var(--text-light);">MoM Biz Reg System SHV Case · May 13, 2026</span>
+        </div>
+        <div style="display: flex; gap: 12px;">
+            <button class="btn btn-primary" onclick="window.print()">🖨️ បោះពុម្ភ</button>
+        </div>
+    </footer>
+
+    <script>
+        function setActive(el) {
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            if (el) el.classList.add('active');
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Highlight active nav on scroll
+        const sections = document.querySelectorAll('.page-card');
+        const navItems = document.querySelectorAll('.nav-item');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (window.scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('href') === '#' + current) {
+                    item.classList.add('active');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
