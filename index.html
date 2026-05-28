@@ -658,7 +658,7 @@
         }
 
         .mermaid-code {
-            background: #1e1e1e;
+            background: #2C3E50;
             color: #d4d4d4;
             padding: 16px;
             border-radius: 8px;
@@ -667,6 +667,7 @@
             overflow-x: auto;
             margin: 0;
             white-space: pre;
+            border: 1px solid rgba(212, 168, 67, 0.3);
         }
 
         /* Roadmap */
@@ -754,6 +755,7 @@
             overflow-x: auto;
             margin: 0;
             white-space: pre;
+            border: 1px solid rgba(212, 168, 67, 0.2);
         }
 
         /* Edge Cases */
@@ -1526,14 +1528,60 @@ GET    /api/v1/incentive-requests/{id}/print-draft
             theme: 'base',
             themeVariables: {
                 primaryColor: '#D4A843',
-                primaryTextColor: '#2C2416',
+                primaryTextColor: '#FFFFFF',
                 primaryBorderColor: '#B8892A',
-                lineColor: '#5C4A28',
-                secondaryColor: '#FAF4E8',
-                tertiaryColor: '#F0E8D8'
+                lineColor: '#FFFFFF',
+                secondaryColor: '#2C3E50',
+                tertiaryColor: '#1a252f',
+                // Sequence diagram specific
+                actorBkg: '#2C3E50',
+                actorBorder: '#D4A843',
+                actorTextColor: '#FFFFFF',
+                actorLineColor: '#FFFFFF',
+                signalColor: '#FFFFFF',
+                signalTextColor: '#FFFFFF',
+                // Sequence numbers
+                sequenceNumberColor: '#1a252f',
+                // Box/container backgrounds
+                altBoxBkg: '#34495e',
+                altBoxBorder: '#D4A843',
+                boxBkg: '#2C3E50',
+                boxBorder: '#D4A843',
+                // Loop/section backgrounds
+                loopBkg: '#34495e',
+                loopBorder: '#D4A843',
+                // Note backgrounds
+                noteBkgColor: '#1a5276',
+                noteTextColor: '#FFFFFF',
+                noteBorderColor: '#2e86ab',
+                // Labels
+                labelColor: '#FFFFFF',
+                // Arrows
+                arrowheadColor: '#FFFFFF',
+                // Entity colors
+                fillType0: '#D4A843',
+                fillType1: '#27ae60',
+                fillType2: '#e74c3c',
+                fillType3: '#3498db',
+                fillType4: '#9b59b6',
+                fillType5: '#f39c12',
+                // ER diagram
+                entityColor: '#D4A843',
+                attributeBackgroundColor: '#2C3E50',
+                attributeTextColor: '#FFFFFF',
+                attributeBorderColor: '#B8892A',
+                // State diagram
+                stateBkg: '#2C3E50',
+                stateBorder: '#D4A843',
+                stateTextColor: '#FFFFFF',
+                // Git diagram
+                commitLabelColor: '#FFFFFF',
+                commitFill0: '#D4A843',
+                commitFill1: '#27ae60',
+                commitFill2: '#e74c3c',
             },
             flowchart: { curve: 'basis', padding: 20 },
-            sequence: { useMaxWidth: true, wrap: true }
+            sequence: { useMaxWidth: true, wrap: true, diagramMarginX: 20, diagramMarginY: 20 }
         });
 
         // Render Mermaid diagrams
