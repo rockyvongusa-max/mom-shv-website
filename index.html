@@ -6,6 +6,7 @@
     <title>MoM Biz Reg System SHV — Tax Incentive Letter Workflow</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Moul&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
     <style>
         :root {
             --cream: #FAF4E8;
@@ -563,6 +564,230 @@
             color: var(--text-light);
         }
 
+        /* ===== ANALYSIS TAB STYLES ===== */
+        .analysis-section {
+            margin-bottom: 40px;
+            padding-bottom: 32px;
+            border-bottom: 2px solid var(--cream-dark);
+        }
+
+        .analysis-section:last-child {
+            border-bottom: none;
+        }
+
+        .analysis-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .analysis-num {
+            width: 40px;
+            height: 40px;
+            background: var(--gold);
+            color: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .analysis-header h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        /* Overview Grid */
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .overview-card {
+            background: var(--cream);
+            border-radius: 12px;
+            padding: 18px;
+            border: 1px solid rgba(212, 168, 67, 0.15);
+        }
+
+        .overview-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--gold-dark);
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .overview-text {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: var(--text);
+        }
+
+        /* Mermaid Diagrams */
+        .mermaid-note {
+            background: #e8f4f8;
+            border-left: 4px solid #2e86ab;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            color: #1a5276;
+            margin-bottom: 16px;
+        }
+
+        .diagram-card {
+            background: var(--white);
+            border: 1px solid var(--cream-dark);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+            overflow-x: auto;
+        }
+
+        .diagram-title {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text);
+            margin-bottom: 12px;
+        }
+
+        .mermaid-code {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 16px;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            line-height: 1.5;
+            overflow-x: auto;
+            margin: 0;
+            white-space: pre;
+        }
+
+        /* Roadmap */
+        .roadmap {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .roadmap-phase {
+            background: var(--cream);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid rgba(212, 168, 67, 0.15);
+        }
+
+        .phase-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .phase-badge {
+            background: var(--gold);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 20px;
+        }
+
+        .phase-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--text);
+        }
+
+        .phase-tasks {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .task-item {
+            font-size: 0.85rem;
+            line-height: 1.6;
+            padding: 8px 12px;
+            background: var(--white);
+            border-radius: 8px;
+            border: 1px solid rgba(212, 168, 67, 0.1);
+        }
+
+        .task-item code {
+            background: var(--cream-dark);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            color: var(--text);
+        }
+
+        /* Schema Cards */
+        .schema-card {
+            background: var(--white);
+            border: 1px solid var(--cream-dark);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+
+        .schema-title {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text);
+            margin-bottom: 12px;
+        }
+
+        .code-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 16px;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            line-height: 1.6;
+            overflow-x: auto;
+            margin: 0;
+            white-space: pre;
+        }
+
+        /* Edge Cases */
+        .edge-cases {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .edge-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px;
+            background: var(--cream);
+            border-radius: 8px;
+        }
+
+        .edge-badge {
+            background: #e74c3c;
+            color: white;
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 4px;
+            white-space: nowrap;
+        }
+
+        .edge-text {
+            font-size: 0.85rem;
+            line-height: 1.6;
+            color: var(--text);
+        }
+
         /* Mobile Responsive */
         @media (max-width: 768px) {
             .main-container { flex-direction: column; }
@@ -575,6 +800,7 @@
             .detailed-sections { grid-template-columns: 1fr; }
             .action-grid { grid-template-columns: 1fr; }
             .signature-section { grid-template-columns: 1fr; }
+            .overview-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -605,6 +831,14 @@
                 <div class="nav-text">
                     <div class="nav-label">សរុប Summary</div>
                     <div class="nav-desc">English overview</div>
+                </div>
+            </a>
+
+            <a href="#analysis" class="nav-item" onclick="setActive(this)" data-tab="analysis">
+                <div class="nav-number">🔧</div>
+                <div class="nav-text">
+                    <div class="nav-label">Business Analysis</div>
+                    <div class="nav-desc">Technical blueprint</div>
                 </div>
             </a>
 
@@ -738,6 +972,406 @@
                         </div>
 
                     </div>
+                </div>
+            </div>
+
+            <!-- BUSINESS ANALYSIS TAB -->
+            <div id="analysis" class="page-card">
+                <div class="page-header" style="background: linear-gradient(135deg, #1a5276 0%, #2e86ab 100%);">
+                    <div class="page-icon">🔧</div>
+                    <div class="page-title-group">
+                        <h2>Business Analysis & System Blueprint</h2>
+                        <p>GDT Tax Incentive Workflow System · For Developers & Architects</p>
+                    </div>
+                </div>
+                <div class="page-body">
+
+                    <!-- 1. Project Overview -->
+                    <div class="analysis-section">
+                        <div class="analysis-header">
+                            <div class="analysis-num">1</div>
+                            <h3>Project Overview & Scope</h3>
+                        </div>
+                        <div class="analysis-content">
+                            <div class="overview-grid">
+                                <div class="overview-card">
+                                    <div class="overview-label">🎯 System Goal</div>
+                                    <div class="overview-text">Develop a Tax Incentive Letter workflow system for Sihanoukville Special Investment Projects (SHV), integrated into GDT's existing Business Registration Management System (Biz Reg System).</div>
+                                </div>
+                                <div class="overview-card">
+                                    <div class="overview-label">🏢 Business Context</div>
+                                    <div class="overview-text">GDT (General Department of Taxation) needs to issue tax incentive letters to registered enterprises under the Sihanoukville investment scheme, with a 3-level hierarchical approval workflow.</div>
+                                </div>
+                                <div class="overview-card">
+                                    <div class="overview-label">⚙️ Core Constraint</div>
+                                    <div class="overview-text">Must integrate with existing GDT registration system, support Khmer/English bilingual output, and maintain audit trail for all approval actions.</div>
+                                </div>
+                                <div class="overview-card">
+                                    <div class="overview-label">👥 Stakeholders</div>
+                                    <div class="overview-text"><strong>DAGA</strong> (Admin): Drafts letter templates, defines workflow rules. <strong>DICT</strong> (IT): Implements system changes, integrates buttons/APIs. <strong>DG</strong> (Director General): Final approval authority.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. System Flow & UML Diagrams -->
+                    <div class="analysis-section">
+                        <div class="analysis-header">
+                            <div class="analysis-num">2</div>
+                            <h3>System Flow & UML Diagrams (Mermaid.js)</h3>
+                        </div>
+                        <div class="analysis-content">
+                            <p class="mermaid-note">💡 Mermaid diagrams can be rendered in GitHub, VS Code (Mermaid plugin), or mermaid.live</p>
+                            
+                            <!-- Workflow State Diagram -->
+                            <div class="diagram-card">
+                                <div class="diagram-title">📊 Workflow State Diagram</div>
+                                <pre class="mermaid-code">
+stateDiagram-v2
+    [*] --> DraftEntry
+    DraftEntry --> PendingL1Review: Submit to L1 (Officer)
+    PendingL1Review --> L1Approved: L1 Officer Approves & Prints Draft
+    L1Approved --> PendingL2Review: Forward to L2 (Chief)
+    PendingL2Review --> L2Approved: L2 Chief Approves & Prints Draft
+    L2Approved --> PendingL3Review: Forward to L3 (Director General)
+    PendingL3Review --> L3Approved: DG Approves (Final)
+    L1Approved --> ReturnToDraft: Request Revision
+    L2Approved --> ReturnToDraft: Request Revision
+    PendingL3Review --> ReturnToDraft: Request Revision
+    L3Approved --> LetterIssued: Issue Final Letter
+    LetterIssued --> [*]
+    ReturnToDraft --> DraftEntry: Re-submit with revisions</pre>
+                            </div>
+
+                            <!-- Sequence Diagram -->
+                            <div class="diagram-card">
+                                <div class="diagram-title">🔄 Approval Sequence Flow</div>
+                                <pre class="mermaid-code">
+sequenceDiagram
+    participant Taxpayer
+    participant L1_Officer as L1 Officer
+    participant L2_Chief as L2 Chief
+    participant L3_DG as Director General
+    participant System as GDT System
+    
+    Taxpayer->>L1_Officer: Apply Tax Incentive (3-year term)
+    L1_Officer->>System: Select incentive type & duration
+    System->>System: Auto-calculate end date (31.12.28)
+    L1_Officer->>System: Add remarks if special case
+    L1_Officer->>System: Print Draft Letter
+    L1_Officer->>L2_Chief: Forward to L2 for review
+    L2_Chief->>System: Review and Print Draft
+    L2_Chief->>L3_DG: Forward to L3 (DG) for final
+    L3_DG->>System: Review Decision
+    alt DG Approves
+        L3_DG->>System: Click "Approve & Show Decision"
+        System->>System: Generate Final Letter
+        System->>Taxpayer: Issue Tax Incentive Certificate
+    else DG Needs Clarification
+        L3_DG->>System: Click "Approve & Add Note"
+        System->>L1_Officer: Return for clarification
+    end</pre>
+                            </div>
+
+                            <!-- Data Flow Diagram -->
+                            <div class="diagram-card">
+                                <div class="diagram-title">🔀 Data Flow Architecture</div>
+                                <pre class="mermaid-code">
+graph LR
+    subgraph TaxPayer
+        A[Tuple Enterprise]
+    end
+    
+    subgraph Level1_Officer
+        B[L1 Interface]
+        C[Draft Letter + Annex]
+    end
+    
+    subgraph Level2_Chief
+        D[L2 Interface]
+        E[Review Actions]
+    end
+    
+    subgraph Level3_DG
+        F[L3 Interface]
+        G[Final Decision]
+    end
+    
+    subgraph GDT_System
+        H[(Database)]
+        I[Auto Date Calc]
+        J[Print Service]
+        K[Alert Notifications]
+    end
+    
+    A -->|Apply| B
+    B -->|Store| H
+    B -->|Calculate| I
+    I -->|Set End Date| H
+    B -->|Print Draft| J
+    D -->|Review| B
+    D -->|Print Draft| J
+    F -->|Approve| H
+    F -->|Issue| G
+    H -->|Alert| K
+    K -->|Notify| B</pre>
+                            </div>
+
+                            <!-- Entity Relationship -->
+                            <div class="diagram-card">
+                                <div class="diagram-title">🗄️ Entity Relationship Diagram</div>
+                                <pre class="mermaid-code">
+erDiagram
+    TAX_INCENTIVE_REQUEST ||--o{ WORKFLOW_TRANSITION : "has"
+    TAX_INCENTIVE_REQUEST {
+        int id PK
+        string enterprise_name
+        string tax_id
+        int incentive_type FK
+        date start_date
+        date end_date
+        int current_level
+        string status
+        date created_at
+        date updated_at
+    }
+    
+    INCENTIVE_TYPE ||--o{ TAX_INCENTIVE_REQUEST : "defines"
+    INCENTIVE_TYPE {
+        int id PK
+        string name
+        string description
+        int duration_years
+        string tax_rate
+    }
+    
+    WORKFLOW_TRANSITION {
+        int id PK
+        int request_id FK
+        int level
+        string action
+        string approved_by
+        string remarks
+        date action_date
+    }
+    
+    USER ||--o{ WORKFLOW_TRANSITION : "performs"
+    USER {
+        int id PK
+        string name
+        string role
+        string department
+        int level_access
+    }</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. Developer Path -->
+                    <div class="analysis-section">
+                        <div class="analysis-header">
+                            <div class="analysis-num">3</div>
+                            <h3>The Developer Path (Step-by-Step Roadmap)</h3>
+                        </div>
+                        <div class="analysis-content">
+                            <div class="roadmap">
+                                <div class="roadmap-phase">
+                                    <div class="phase-header">
+                                        <span class="phase-badge">Phase 1</span>
+                                        <span class="phase-title">Database Setup & Data Models</span>
+                                    </div>
+                                    <div class="phase-tasks">
+                                        <div class="task-item">✅ Create <code>tax_incentive_requests</code> table with enterprise info, dates, status</div>
+                                        <div class="task-item">✅ Create <code>incentive_types</code> lookup table (tax types, duration years)</div>
+                                        <div class="task-item">✅ Create <code>workflow_transitions</code> audit log table</div>
+                                        <div class="task-item">✅ Create <code>users</code> table with role-based access (L1/L2/L3)</div>
+                                        <div class="task-item">✅ Add indexes on <code>enterprise_id</code>, <code>current_level</code>, <code>status</code></div>
+                                    </div>
+                                </div>
+
+                                <div class="roadmap-phase">
+                                    <div class="phase-header">
+                                        <span class="phase-badge">Phase 2</span>
+                                        <span class="phase-title">API Layer (Backend Services)</span>
+                                    </div>
+                                    <div class="phase-tasks">
+                                        <div class="task-item">✅ REST endpoints: <code>POST /api/incentive-requests</code> (create)</div>
+                                        <div class="task-item">✅ <code>GET /api/incentive-requests/{id}</code> (read single)</div>
+                                        <div class="task-item">✅ <code>PATCH /api/incentive-requests/{id}/submit</code> (submit to L1)</div>
+                                        <div class="task-item">✅ <code>PATCH /api/incentive-requests/{id}/approve-l1</code>, <code>/approve-l2</code>, <code>/approve-l3</code></div>
+                                        <div class="task-item">✅ <code>GET /api/incentive-requests?status=PENDING_L1</code> (filter by level)</div>
+                                        <div class="task-item">✅ Auto-date calculation endpoint: <code>/calculate-end-date</code></div>
+                                        <div class="task-item">✅ Print draft endpoint: <code>GET /api/incentive-requests/{id}/print-draft</code></div>
+                                    </div>
+                                </div>
+
+                                <div class="roadmap-phase">
+                                    <div class="phase-header">
+                                        <span class="phase-badge">Phase 3</span>
+                                        <span class="phase-title">Frontend UI / Interface Updates</span>
+                                    </div>
+                                    <div class="phase-tasks">
+                                        <div class="task-item">✅ L1 Interface: Add incentive type selector, year duration picker, remarks column</div>
+                                        <div class="task-item">✅ L1 Interface: Add "Print Draft Letter" button</div>
+                                        <div class="task-item">✅ L1 Interface: Add "Detect End Date" auto-calculation with override option</div>
+                                        <div class="task-item">✅ L2 Interface: Add "Print Draft" + "Forward to L3" button</div>
+                                        <div class="task-item">✅ L3 Interface: Add "Approve & Show Decision" + "Approve & Add Note" buttons</div>
+                                        <div class="task-item">✅ Dashboard: Show pending requests per level, filter by status</div>
+                                        <div class="task-item">✅ Add alert/notification badge when remark required</div>
+                                    </div>
+                                </div>
+
+                                <div class="roadmap-phase">
+                                    <div class="phase-header">
+                                        <span class="phase-badge">Phase 4</span>
+                                        <span class="phase-title">Integration & Testing</span>
+                                    </div>
+                                    <div class="phase-tasks">
+                                        <div class="task-item">✅ Integrate with existing GDT Biz Reg System (share enterprise data)</div>
+                                        <div class="task-item">✅ API-based data sharing between DAGA/DICT systems (no direct DB access)</div>
+                                        <div class="task-item">✅ Unit tests for auto-date calculation (edge: 3yr, 5yr, leap year)</div>
+                                        <div class="task-item">✅ Integration tests for 3-level approval flow</div>
+                                        <div class="task-item">✅ User acceptance testing with DAGA, DICT, DG offices</div>
+                                    </div>
+                                </div>
+
+                                <div class="roadmap-phase">
+                                    <div class="phase-header">
+                                        <span class="phase-badge">Phase 5</span>
+                                        <span class="phase-title">Deployment & Handover</span>
+                                    </div>
+                                    <div class="phase-tasks">
+                                        <div class="task-item">✅ Staging deployment for UAT</div>
+                                        <div class="task-item">✅ Production deployment with rollback plan</div>
+                                        <div class="task-item">✅ User manual & admin guide documentation</div>
+                                        <div class="task-item">✅ Training session for DAGA/DICT officers</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4. Data Models & API Contracts -->
+                    <div class="analysis-section">
+                        <div class="analysis-header">
+                            <div class="analysis-num">4</div>
+                            <h3>Data Models & API Contracts</h3>
+                        </div>
+                        <div class="analysis-content">
+                            
+                            <!-- Schema Tables -->
+                            <div class="schema-card">
+                                <div class="schema-title">📋 Database Schema: tax_incentive_requests</div>
+                                <pre class="code-block">
+CREATE TABLE tax_incentive_requests (
+    id              INT PRIMARY KEY AUTO_INCREMENT,
+    enterprise_name VARCHAR(255) NOT NULL,
+    tax_id          VARCHAR(50) NOT NULL,
+    incentive_type_id INT NOT NULL,
+    start_date      DATE NOT NULL,
+    end_date        DATE GENERATED ALWAYS AS (
+        CASE WHEN duration_years = 3 THEN DATE(start_date + INTERVAL 3 YEAR - 1 DAY)
+             WHEN duration_years = 5 THEN DATE(start_date + INTERVAL 5 YEAR - 1 DAY)
+        END
+    ),
+    duration_years  INT NOT NULL DEFAULT 3,
+    current_level   ENUM('L1','L2','L3','APPROVED','REJECTED') DEFAULT 'L1',
+    status          ENUM('DRAFT','PENDING','APPROVED','ISSUED') DEFAULT 'DRAFT',
+    remarks         TEXT,
+    created_by      INT,
+    created_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (incentive_type_id) REFERENCES incentive_types(id),
+    FOREIGN KEY (created_by) REFERENCES users(id)
+);
+
+CREATE TABLE workflow_transitions (
+    id              INT PRIMARY KEY AUTO_INCREMENT,
+    request_id      INT NOT NULL,
+    from_level      VARCHAR(10),
+    to_level        VARCHAR(10),
+    action          ENUM('SUBMIT','APPROVE','RETURN','PRINT','ISSUE') NOT NULL,
+    performed_by    INT NOT NULL,
+    decision_notes  TEXT,
+    action_date     TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (request_id) REFERENCES tax_incentive_requests(id),
+    FOREIGN KEY (performed_by) REFERENCES users(id)
+);</pre>
+                            </div>
+
+                            <!-- API Contracts -->
+                            <div class="schema-card">
+                                <div class="schema-title">🔌 API Endpoints Reference</div>
+                                <pre class="code-block">
+POST   /api/v1/incentive-requests
+       → Creates new tax incentive request (Level 1 draft)
+       Body: { enterprise_name, tax_id, incentive_type_id, start_date, duration_years }
+       Response: { id, enterprise_name, start_date, end_date, status: "DRAFT" }
+
+GET    /api/v1/incentive-requests
+       → List all requests (filter: ?level=L1&status=PENDING)
+       Response: { data: [...], pagination: {...} }
+
+GET    /api/v1/incentive-requests/{id}
+       → Get single request with full history
+       Response: { request: {...}, transitions: [...], current_level: "L1" }
+
+PATCH  /api/v1/incentive-requests/{id}/submit
+       → Submit draft to L1 Officer for review
+       Body: { remarks?: string }
+       Response: { status: "PENDING", current_level: "L1" }
+
+PATCH  /api/v1/incentive-requests/{id}/approve-l1
+       → L1 Officer approves and forwards to L2
+       Body: { remarks?: string }
+       Response: { status: "PENDING", current_level: "L2" }
+
+PATCH  /api/v1/incentive-requests/{id}/approve-l2
+       → L2 Chief approves and forwards to L3
+       Body: { remarks?: string }
+       Response: { status: "PENDING", current_level: "L3" }
+
+PATCH  /api/v1/incentive-requests/{id}/approve-l3
+       → L3 DG final approval - issues certificate
+       Body: { decision: "APPROVED", notes?: string }
+       Response: { status: "APPROVED", current_level: "L3", end_date: "2028-12-31" }
+
+GET    /api/v1/incentive-requests/{id}/calculate-end-date
+       → Auto-calculates end date based on start_date + duration
+       Query: ?start_date=2026-05-01&duration_years=3
+       Response: { start_date: "2026-05-01", end_date: "2028-12-31" }
+
+GET    /api/v1/incentive-requests/{id}/print-draft
+       → Returns draft letter PDF for printing
+       Response: PDF binary stream</pre>
+                            </div>
+
+                            <!-- Edge Cases -->
+                            <div class="schema-card">
+                                <div class="schema-title">⚠️ Edge Cases & Business Rules</div>
+                                <div class="edge-cases">
+                                    <div class="edge-item">
+                                        <div class="edge-badge">Edge 1</div>
+                                        <div class="edge-text"><strong>Manual End Date Override:</strong> If officer selects non-standard duration, system shows alert and requires entry in Remark column explaining reason before allowing submission.</div>
+                                    </div>
+                                    <div class="edge-item">
+                                        <div class="edge-badge">Edge 2</div>
+                                        <div class="edge-text"><strong>Return to Draft:</strong> If any level requests revision, request returns to L1 with flag "REVISION_REQUIRED". L1 officer must re-submit after corrections.</div>
+                                    </div>
+                                    <div class="edge-item">
+                                        <div class="edge-badge">Edge 3</div>
+                                        <div class="edge-text"><strong>Concurrent Editing:</strong> If two users open same request, second user sees "Locked by [user]" warning. Must wait or force-unlock (admin only).</div>
+                                    </div>
+                                    <div class="edge-item">
+                                        <div class="edge-badge">Edge 4</div>
+                                        <div class="edge-text"><strong>Expiry Auto-Detection:</strong> System auto-detects if current date > end_date and marks status "EXPIRED". Triggers notification to enterprise and L1 officer.</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
@@ -886,9 +1520,50 @@
     </footer>
 
     <script>
+        // Initialize Mermaid diagrams
+        mermaid.initialize({
+            startOnLoad: false,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#D4A843',
+                primaryTextColor: '#2C2416',
+                primaryBorderColor: '#B8892A',
+                lineColor: '#5C4A28',
+                secondaryColor: '#FAF4E8',
+                tertiaryColor: '#F0E8D8'
+            },
+            flowchart: { curve: 'basis', padding: 20 },
+            sequence: { useMaxWidth: true, wrap: true }
+        });
+
+        // Render Mermaid diagrams
+        async function renderMermaid() {
+            const mermaidElements = document.querySelectorAll('.mermaid-code:not(.mermaid-rendered)');
+            for (const el of mermaidElements) {
+                const id = 'mermaid-' + Math.random().toString(36).substr(2, 9);
+                const code = el.textContent.trim();
+                try {
+                    const { svg } = await mermaid.render(id, code);
+                    el.innerHTML = svg;
+                    el.classList.add('mermaid-rendered');
+                } catch (e) {
+                    el.innerHTML = '<div style="color: #e74c3c; font-size: 0.75rem; padding: 12px; background: #fdf2f2; border-radius: 6px;">⚠️ Diagram error: ' + e.message.replace(/</g, '&lt;') + '</div>';
+                }
+            }
+        }
+
+        // Render Mermaid when page loads
+        window.addEventListener('load', () => {
+            setTimeout(renderMermaid, 500);
+        });
+
         function setActive(el) {
             document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
             if (el) el.classList.add('active');
+            // Trigger mermaid render when analysis tab is activated
+            if (el && el.getAttribute('data-tab') === 'analysis') {
+                setTimeout(renderMermaid, 200);
+            }
         }
 
         // Smooth scroll for anchor links
