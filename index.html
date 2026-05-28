@@ -670,6 +670,37 @@
             border: 1px solid rgba(212, 168, 67, 0.3);
         }
 
+        /* Force dark text on all Mermaid SVG text elements */
+        .mermaid-code svg text,
+        .mermaid-code svg tspan {
+            fill: #2C2416 !important;
+            color: #2C2416 !important;
+            stroke: none !important;
+        }
+
+        /* State diagram specific overrides */
+        .mermaid-code svg .stateGroup text,
+        .mermaid-code svg .stateLabel text,
+        .mermaid-code svg .stateGroup tspan,
+        .mermaid-code svg .stateLabel tspan,
+        .mermaid-code svg .stateText {
+            fill: #2C2416 !important;
+            color: #2C2416 !important;
+        }
+
+        /* Transition arrows/labels */
+        .mermaid-code svg .transitionLabelText {
+            fill: #2C2416 !important;
+            color: #2C2416 !important;
+        }
+
+        /* Start/End nodes text */
+        .mermaid-code svg .start_state text,
+        .mermaid-code svg .end_state text,
+        .mermaid-code svg .innerEndState text {
+            fill: #FFFFFF !important;
+        }
+
         /* Roadmap */
         .roadmap {
             display: flex;
